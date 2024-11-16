@@ -32,10 +32,10 @@ model Profile {
 }
 
 model Server {
-    id        String @id @default(uuid())
-    name      String
-    imageUrl  String @db.Text
-    inviteUrl String @db.Text
+    id         String @id @default(uuid())
+    name       String
+    imageUrl   String @db.Text
+    inviteCode String @db.Text
 
     // 关联模型（引用）
     profileId String
@@ -45,7 +45,7 @@ model Server {
     members Member[]
 
     // 关联频道 
-    channel Channel[]
+    channels Channel[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
