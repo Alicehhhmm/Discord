@@ -1,8 +1,11 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { clerkMiddleware, createRouteMatcher, } from '@clerk/nextjs/server'
 
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)'])
+// 公共路由创建
+const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/api/uploadthing'])
 
 export default clerkMiddleware(async (auth, request) => {
+
+    // 除指定的路由，其他路由均受保护（需要身份验证）
     if (!isPublicRoute(request)) {
         await auth.protect()
     }
