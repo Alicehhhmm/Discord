@@ -61,7 +61,7 @@ export const InitialModal = () => {
                                     name='imageUrl'
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FileUpload />
+                                            <FileUpload endpoint='serverImage' value={field.value} onChange={field.onChange} />
                                         </FormItem>
                                     )}
                                 />
