@@ -26,3 +26,10 @@ bun dev
 | SEO          | NextJS    | V15.0.3^ |
 | Database ORM | PrismaJS  | lasted   |
 | Database     | MySQL     | v8.0.0   |
+
+# Cloud toolchain
+
+| 工具        | 用途                 | 是否账户 |
+| ----------- | -------------------- | -------- |
+| uploadthing | 文件存储 (2G 内免费) | Yes      |
+| ClerkJS     | 身份认证             | Yes      |
