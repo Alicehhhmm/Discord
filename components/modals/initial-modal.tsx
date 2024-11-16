@@ -31,7 +31,7 @@ export const InitialModal = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: '',
-            image: '',
+            imageUrl: '',
         },
     })
 
@@ -58,7 +58,7 @@ export const InitialModal = () => {
                             <div className='flex items-center justify-center text-center'>
                                 <FormField
                                     control={form.control}
-                                    name='image'
+                                    name='imageUrl'
                                     render={({ field }) => (
                                         <FormItem>
                                             <FileUpload />
