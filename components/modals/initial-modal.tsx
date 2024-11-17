@@ -1,13 +1,17 @@
 'use client'
 import { useState, useEffect } from 'react'
-import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from '@/components/ui/dialog'
+
+import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { FileUpload } from '@/components/file-upload'
 
 const formSchema = z.object({
@@ -21,13 +25,14 @@ const formSchema = z.object({
 
 export const InitialModal = () => {
     const [isMounted, setIsMounted] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
         setIsMounted(true)
     }, [])
 
-    // 构造一个FormData
-    const form = useForm({
+    // 1.init FormData
+    const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: '',
@@ -38,7 +43,14 @@ export const InitialModal = () => {
     const isLoading = form.formState.isSubmitting
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log('onSubmit', values)
+        try {
+            await axios.post('/api/servers', values)
+            form.reset()
+            router.refresh()
+            window.location.reload()
+        } catch (error) {
+            console.log('[INITIAL_MODAL]', error)
+        }
     }
 
     if (!isMounted) return null
@@ -62,6 +74,7 @@ export const InitialModal = () => {
                                     render={({ field }) => (
                                         <FormItem>
                                             <FileUpload endpoint='serverImage' value={field.value} onChange={field.onChange} />
+                                            <FormMessage className='text-red-500' />
                                         </FormItem>
                                     )}
                                 />
