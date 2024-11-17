@@ -13,7 +13,6 @@ interface FileUploadProps {
 
 export const FileUpload = ({ endpoint, value, onChange }: FileUploadProps) => {
     const fileType = value?.split('.').pop()
-    console.log('fils', value, fileType)
 
     // 上传为图片时，以头像形式渲染
     if (value && fileType !== 'pdf') {
