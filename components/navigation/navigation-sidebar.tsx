@@ -1,7 +1,9 @@
 import { currentProfile } from '@/lib/current-profile'
 import { redirect } from 'next/navigation'
+import { UserButton } from '@clerk/nextjs'
 import { db } from '@/lib/db'
 
+import { ModeToggle } from '@/components/mode-toggle'
 import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { NavigationAction } from '@/components/navigation/navigation-action'
@@ -34,6 +36,17 @@ export const NavigationSidebar = async () => {
                     <NavigationItem id={server.id} name={server.name} imageUrl={server.imageUrl} />
                 ))}
             </ScrollArea>
+            <div className='pb-3 mt-auto flex items-center flex-col gap-y-4'>
+                <ModeToggle />
+                <UserButton
+                    afterSwitchSessionUrl='/'
+                    appearance={{
+                        elements: {
+                            avatarBox: 'h-[48px] w-[48px]',
+                        },
+                    }}
+                />
+            </div>
         </div>
     )
 }
