@@ -18,7 +18,7 @@ CREATE TABLE `Server` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `imageUrl` TEXT NOT NULL,
-    `inviteUrl` TEXT NOT NULL,
+    `inviteCode` TEXT NOT NULL,
     `profileId` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `Member` (
 CREATE TABLE `Channel` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
-    `type` ENUM('Text', 'AUDIO', 'VIDEO') NOT NULL DEFAULT 'Text',
+    `type` ENUM('TEXT', 'AUDIO', 'VIDEO') NOT NULL DEFAULT 'TEXT',
     `profileId` VARCHAR(191) NOT NULL,
     `serverId` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
