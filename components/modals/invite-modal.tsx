@@ -1,5 +1,7 @@
 'use client'
-import { Copy, RefreshCw } from 'lucide-react'
+
+import { useState } from 'react'
+import { Check, Copy, RefreshCw } from 'lucide-react'
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
@@ -10,12 +12,25 @@ import { Button } from '@/components/ui/button'
 import { useOrigin } from '@/hooks/use-origin'
 
 export const InviteModal = () => {
-    const { isOpen, onClose, type } = useModal()
+    const { isOpen, onClose, type, data } = useModal()
     const origin = useOrigin()
 
     const isModalOpen = isOpen && type === 'invite'
 
-    const inviteUrl = `${origin}`
+    const { server } = data
+
+    const [copied, setCopied] = useState(false)
+    const [isLoading, setIsloading] = useState(false)
+
+    const inviteUrl = `${origin}/invite/${server?.inviteCode}`
+
+    const onCopy = () => {
+        navigator.clipboard.writeText(inviteUrl)
+        setCopied(true)
+        setTimeout(() => {
+            setCopied(false)
+        }, 1000)
+    }
 
     return (
         <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -27,8 +42,8 @@ export const InviteModal = () => {
                     <Label className='upercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>Server invite link</Label>
                     <div className='flex items-center mt-2 gap-x-2'>
                         <Input className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0' value={inviteUrl} />
-                        <Button size='icon' className=' active:bg-zinc-600 dark:hover:bg-zinc-300/50'>
-                            <Copy className='w-4 h-4' />
+                        <Button onClick={onCopy} size='icon' className=' active:bg-zinc-600 dark:hover:bg-zinc-300/50'>
+                            {copied ? <Check className='w-4 h-4' /> : <Copy className='w-4 h-4' />}
                         </Button>
                     </div>
                     <Button size='sm' variant='link' className='text-xs text-zinc-500 mt-4'>
