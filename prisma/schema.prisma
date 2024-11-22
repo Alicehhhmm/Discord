@@ -80,7 +80,7 @@ model Member {
 }
 
 enum ChannelType {
-    Text
+    TEXT
     AUDIO
     VIDEO
 }
@@ -88,7 +88,7 @@ enum ChannelType {
 model Channel {
     id   String      @id @default(uuid())
     name String
-    type ChannelType @default(Text)
+    type ChannelType @default(TEXT)
 
     // 关联属性模型（表）
     profileId String
