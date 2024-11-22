@@ -31,9 +31,9 @@ export const NavigationSidebar = async () => {
         <div className='space-y-4 flex flex-col items-center h-full w-full text-primary dark:bg-[#1E1F22] py-3'>
             <NavigationAction />
             <Separator className='h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 max-auto' />
-            <ScrollArea className='flex-1 w-full'>
+            <ScrollArea className='flex-1 w-full space-y-2'>
                 {servers.map(server => (
-                    <NavigationItem id={server.id} name={server.name} imageUrl={server.imageUrl} />
+                    <NavigationItem key={server.id} id={server.id} name={server.name} imageUrl={server.imageUrl} />
                 ))}
             </ScrollArea>
             <div className='pb-3 mt-auto flex items-center flex-col gap-y-4'>
