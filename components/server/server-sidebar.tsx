@@ -38,7 +38,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
         },
     })
 
-    // 服务消息是否有:文本|音频|视频|成员
+    // 服务消息是否有:文本|音频|视频|成员(过滤掉自己：防止自己在成员列表中显示)
     const textChannels = server?.channels.filter(channel => channel.type === ChannelType.TEXT)
     const audioChannels = server?.channels.filter(channel => channel.type === ChannelType.AUDIO)
     const videoChannels = server?.channels.filter(channel => channel.type === ChannelType.VIDEO)
@@ -48,8 +48,9 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
         return redirect('/')
     }
 
-    const role = server.members.find(member => member.profileId !== profile.id)?.role
-    // const role = server.members.find(member => member.profileId === profile.id)?.role
+    // 获取当前用户：在当前服务的角色
+    const role = server.members.find(member => member.profileId === profile.id)?.role
+    console.log('current_profile@role=', role)
 
     return (
         <div className='flex flex-col h-full w-full text-primary dark:bg-[#2B2D31] bg-[#F2F3F5]'>
