@@ -52,7 +52,6 @@ export const MembersModal = () => {
                 url: `/api/members/${memberId}`,
                 query: {
                     serverId: server?.id,
-                    memberId,
                 },
             })
 
@@ -85,9 +84,8 @@ export const MembersModal = () => {
                                 </div>
                                 <p className='text-xs text-zinc-500'>{member.profile.email}</p>
                             </div>
-                            {/* 操作权限：管理员、会员 */}
-                            {/* server.profileId !== member.profileId && loadingId !== member.id */}
-                            {1 && (
+                            {/*非频道成员权限角色功能: 排除：管理员（本身不需要授权）*/}
+                            {server.profileId !== member.profileId && loadingId !== member.id && (
                                 <div className='ml-auto'>
                                     <DropdownMenu>
                                         <DropdownMenuTrigger>

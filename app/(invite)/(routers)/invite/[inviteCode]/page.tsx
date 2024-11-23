@@ -34,15 +34,15 @@ const InviteCodePage = async ({ params }: InviteCodePageProps) => {
         },
     })
 
-    // 如有服务则重定向
+    // 受邀成员：如有当前服务则重定向
     if (existingServer) {
         return redirect(`/servers/${existingServer.id}`)
     }
 
-    // 否则创建新建的邀请服务
+    // 否则创建新建成员,添加到邀请的服务
     const server = await db.server.update({
         where: {
-            inviteCode: params.inviteCode,
+            inviteCode,
         },
         data: {
             members: {
