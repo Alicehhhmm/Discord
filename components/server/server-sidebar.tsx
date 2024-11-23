@@ -50,7 +50,6 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
 
     // 获取当前用户：在当前服务的角色
     const role = server.members.find(member => member.profileId === profile.id)?.role
-    console.log('current_profile@role=', role)
 
     return (
         <div className='flex flex-col h-full w-full text-primary dark:bg-[#2B2D31] bg-[#F2F3F5]'>

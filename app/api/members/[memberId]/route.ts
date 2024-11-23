@@ -66,3 +66,61 @@ export async function PATCH(
         return new NextResponse("Internal Error", { status: 500 })
     }
 }
+
+
+export async function DELETE(
+    req: Request,
+    { params }: { params: { memberId: string } }
+) {
+    try {
+        const profile = await currentProfile();
+        const { memberId } = await params
+        const { searchParams } = new URL(req.url)
+
+        const serverId = searchParams.get('serverId');
+
+        if (!profile) {
+            return new NextResponse("Unauthorized", { status: 401 })
+        }
+
+        if (!serverId) {
+            return new NextResponse("Server ID Missing", { status: 400 })
+        }
+
+        if (!memberId) {
+            return new NextResponse("Member ID Missing", { status: 400 })
+        }
+
+        const server = await db.server.update({
+            where: {
+                id: serverId,
+                profileId: profile.id
+            },
+            data: {
+                members: {
+                    deleteMany: {
+                        id: memberId,
+                        profileId: {
+                            not: profile.id // 防止管理员误删自己
+                        },
+                    },
+                },
+            },
+            include: {
+                members: {
+                    include: {
+                        profile: true,
+                    },
+                    orderBy: {
+                        role: 'asc'
+                    }
+                },
+            }
+        })
+
+        return NextResponse.json(server);
+    } catch (error) {
+        console.log("[MEMBERS_ID_DELETE]", error);
+        return new NextResponse("Internal Error", { status: 500 })
+    }
+}
