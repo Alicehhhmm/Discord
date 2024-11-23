@@ -39,6 +39,7 @@ export const InviteModal = () => {
             const response = await axios.patch(`/api/servers/${server?.id}/invite-code`)
 
             onOpen('invite', { server: response.data })
+            setIsloading(false)
         } catch (error) {
             console.log('INVITE_MODAL_ERROR', error)
         }
@@ -54,11 +55,12 @@ export const InviteModal = () => {
                     <Label className='upercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>Server invite link</Label>
                     <div className='flex items-center mt-2 gap-x-2'>
                         <Input
+                            onChange={() => {}}
+                            value={inviteUrl}
                             disabled={isLoading}
                             className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
-                            value={inviteUrl}
                         />
-                        <Button disabled={isLoading} onClick={onCopy} size='icon' className=' active:bg-zinc-600 dark:hover:bg-zinc-300/50'>
+                        <Button disabled={isLoading} onClick={onCopy} size='icon'>
                             {copied ? <Check className='w-4 h-4' /> : <Copy className='w-4 h-4' />}
                         </Button>
                     </div>
