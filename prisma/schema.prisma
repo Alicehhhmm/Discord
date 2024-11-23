@@ -35,7 +35,7 @@ model Server {
     id         String @id @default(uuid())
     name       String
     imageUrl   String @db.Text
-    inviteCode String @db.Text
+    inviteCode String @unique
 
     // 关联模型（引用）
     profileId String
