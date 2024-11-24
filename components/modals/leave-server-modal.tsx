@@ -22,7 +22,7 @@ export const LeaveServerModal = () => {
     const onClick = async () => {
         try {
             setIsloading(true)
-            await axios.post(`/api/servers/${server?.id}/leave`)
+            await axios.patch(`/api/servers/${server?.id}/leave`)
 
             onClose()
             router.refresh()
