@@ -18,7 +18,7 @@ interface ServerSectionProps {
 export const ServerSection = ({ label, role, sectionType, channelType, server }: ServerSectionProps) => {
     const { onOpen } = useModal()
     return (
-        <div className='flex items-center justify-between mt-2 py-2 px-2'>
+        <div className='flex items-center justify-between mt-2 py-2'>
             <p className='text-xs uppercase font-semibold text-zinc-500 dark:text-zinc-400'>{label}</p>
             {role !== MemberRole.GUEST && sectionType === 'channels' && (
                 <ActionTooltip label='Create Channel' side='top'>
@@ -32,7 +32,7 @@ export const ServerSection = ({ label, role, sectionType, channelType, server }:
             )}
 
             {role === MemberRole.ADMIN && sectionType === 'members' && (
-                <ActionTooltip label='Channel Settings' side='top'>
+                <ActionTooltip label='Manage Members' side='top'>
                     <button
                         onClick={() => onOpen('members', { server })}
                         className='text-zinc-500 hover:text-znic-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition'
