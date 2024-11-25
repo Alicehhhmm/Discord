@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { z } from 'zod'
 import axios from 'axios'
 import qs from 'query-string'
@@ -30,11 +31,12 @@ const formSchema = z.object({
 })
 
 export const CreateChannelModal = () => {
-    const { isOpen, onClose, type } = useModal()
+    const { isOpen, onClose, type, data } = useModal()
     const router = useRouter()
     const params = useParams()
 
     const isModalOpen = isOpen && type === 'createChannel'
+    const { channelType } = data
 
     // 1.init FormData
     const form = useForm<z.infer<typeof formSchema>>({
@@ -44,6 +46,14 @@ export const CreateChannelModal = () => {
             type: ChannelType.TEXT,
         },
     })
+
+    useEffect(() => {
+        if (channelType) {
+            form.setValue('type', channelType)
+        } else {
+            form.setValue('type', ChannelType.TEXT)
+        }
+    }, [type])
 
     const isLoading = form.formState.isSubmitting
 
