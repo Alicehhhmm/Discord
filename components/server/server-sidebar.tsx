@@ -7,6 +7,9 @@ import { currentProfile } from '@/lib/current-profile'
 
 import { ServerHeader } from './server-header'
 import { ServerSearch } from './server-search'
+import { ServerSection } from './server-section'
+import { ServerChannel } from './server-channel'
+import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 interface ServerSidebarProps {
@@ -113,6 +116,15 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                         ]}
                     />
                 </div>
+                <Separator className='bg-zinc-200 dark:bg-zinc-700 rounded-md my-2' />
+                {!!textChannels?.length && (
+                    <div className='mb-2'>
+                        <ServerSection sectionType='channels' channelType={ChannelType.TEXT} role={role} label='TEXT Channels' />
+                        {textChannels.map(channel => (
+                            <ServerChannel key={channel.id} channel={channel} server={server} role={role} />
+                        ))}
+                    </div>
+                )}
             </ScrollArea>
         </div>
     )
