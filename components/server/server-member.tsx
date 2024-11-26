@@ -23,9 +23,13 @@ export const ServerMember = ({ member, server }: ServerMemberProps) => {
 
     const icon = roleIconMap[member.role]
 
+    const onClick = () => {
+        router.push(`/servers/${params?.serverId}/converstaions/${member.id}`)
+    }
+
     return (
         <button
-            onClick={() => {}}
+            onClick={onClick}
             className={cn(
                 `w-full flex items-center group px-2 py-2 mb-1 rounded-md gap-x-2
                 hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition  `,
