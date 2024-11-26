@@ -18,12 +18,12 @@ const findCoversation = async (memberOneId: string, memberTwoId: string) => {
                 ]
             },
             include: {
-                memmberOne: {
+                memberOne: {
                     include: {
                         profile: true
                     }
                 },
-                memmberTwo: {
+                memberTwo: {
                     include: {
                         profile: true
                     }
@@ -49,12 +49,12 @@ const createNewCoversation = async (memberOneId: string, memberTwoId: string) =>
                 memberTwoId,
             },
             include: {
-                memmberOne: {
+                memberOne: {
                     include: {
                         profile: true
                     }
                 },
-                memmberTwo: {
+                memberTwo: {
                     include: {
                         profile: true
                     }
@@ -68,8 +68,8 @@ const createNewCoversation = async (memberOneId: string, memberTwoId: string) =>
 
 /**
  * 获取特定成员对话|没有测创建一个新的对话
- * @param memberOneId 
- * @param memberTwoId 
+ * @param memberOneId 当前用户memberId
+ * @param memberTwoId 其他用户memberId
  * @returns any conversation
  */
 export const getOrCreateCoversation = async (memberOneId: string, memberTwoId: string) => {

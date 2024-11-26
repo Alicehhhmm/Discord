@@ -140,10 +140,10 @@ model Conversation {
     id String @id @default(uuid())
 
     memberOneId String
-    memmberOne  Member @relation("MemberOne", fields: [memberOneId], references: [id], onDelete: Cascade)
+    memberOne   Member @relation("MemberOne", fields: [memberOneId], references: [id], onDelete: Cascade)
 
     memberTwoId String
-    memmberTwo  Member @relation("MemberTwo", fields: [memberTwoId], references: [id], onDelete: Cascade)
+    memberTwo   Member @relation("MemberTwo", fields: [memberTwoId], references: [id], onDelete: Cascade)
 
     directMessage DirectMessage[]
 
