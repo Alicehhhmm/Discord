@@ -117,8 +117,9 @@ model Channel {
 }
 
 model Message {
-    id      String @id @default(uuid())
-    content String @db.Text
+    id      String  @id @default(uuid())
+    content String  @db.Text
+    fileUrl String? @db.Text
 
     // 关联成员模型
     memberId String
