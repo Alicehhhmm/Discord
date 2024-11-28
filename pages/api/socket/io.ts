@@ -4,9 +4,6 @@ import { Server as ServerIo } from "socket.io";
 
 import { NextApiResponseServerIo } from "@/typings/type";
 
-/**
- * 基础配置
- */
 export const config = {
     api: {
         bodyParser: false,
@@ -14,20 +11,19 @@ export const config = {
 }
 
 /**
- * 处理 socket.io 事件
+ * socket.io Server implementation
+ * socket.io 服务端, 处理事件
+ * 注意：必须保证服务端、客户端的 path 一致
  * @param req
- * @param res
- * 
+ * @param res 
+ * @return NextResponse
 */
 const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
 
     if (!res.socket.server.io) {
-        const path = '/api/socket/io'
         const httpServer: NetServer = res.socket.server as any
         const io = new ServerIo(httpServer, {
-            path: path,
-            // @ts-ignore
-            addTrailingSlashesWith: false  // 是否添加尾部斜杠
+            path: '/api/socket/io',
         });
         res.socket.server.io = io
     }

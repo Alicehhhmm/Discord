@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import { io as ClientIO } from 'socket.io-client'
-// import { socketInstance } from 'socket.io'
 
 type SocketContextType = {
     socket: any | null
@@ -23,10 +22,8 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     const [isConnected, setIsConnected] = useState(false)
 
     useEffect(() => {
-        // 默认Next的: localhostUrl
         const socketInstance = new (ClientIO as any)(process.env.NEXT_PUBLIC_SITE_URL!, {
-            path: `/api/socket/io/`,
-            addTrailingSlash: false,
+            path: '/api/socket/io',
         })
 
         socketInstance.on('connect', () => {
@@ -35,6 +32,10 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 
         socketInstance.on('disconnect', () => {
             setIsConnected(false)
+        })
+
+        socketInstance.on('connection_error', (error: any) => {
+            console.error('socket.io-client connection error:', error)
         })
 
         setSocket(socketInstance)
