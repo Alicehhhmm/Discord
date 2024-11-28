@@ -1,5 +1,5 @@
 'use client'
-import dynamic from 'next/dynamic'
+
 import { useTheme } from 'next-themes'
 
 import { Smile } from 'lucide-react'
