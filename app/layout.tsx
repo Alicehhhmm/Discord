@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/provider/theme-provider'
 import { ModalProvider } from '@/components/provider/modal-provider'
 import { SocketProvider } from '@/components/provider/socket-provider'
+import { QueryProvider } from '@/components/provider/query-provider'
 
 const font = Open_Sans({
     variable: '--font-open-sans',
@@ -30,7 +31,7 @@ export default function RootLayout({
                     <ThemeProvider attribute='class' defaultTheme='dark' enableSystem storageKey='discord-theme' disableTransitionOnChange>
                         <SocketProvider>
                             <ModalProvider />
-                            {children}
+                            <QueryProvider>{children}</QueryProvider>
                         </SocketProvider>
                     </ThemeProvider>
                 </body>
