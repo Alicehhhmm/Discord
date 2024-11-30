@@ -148,7 +148,13 @@ export const ChatItem = ({
                             rel='noopener noreferrer'
                             className='relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48'
                         >
-                            <Image src={fileUrl} alt={content} fill className='object-cover' />
+                            <Image
+                                src={fileUrl}
+                                alt={content}
+                                fill
+                                className='object-cover'
+                                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                            />
                         </a>
                     )}
                     {/* 附件文件内容 */}
