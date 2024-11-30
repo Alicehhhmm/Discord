@@ -3,7 +3,9 @@
 import { Fragment, useRef, ElementRef } from 'react'
 import { format } from 'date-fns'
 import { Member, Message, Profile } from '@prisma/client'
+
 import { useChatQuery } from '@/hooks/use-chat-query'
+import { useChatSocket } from '@/hooks/use-chat-socket'
 
 import { Loader2, ServerCrash } from 'lucide-react'
 import { ChatWelcome } from './chat-welcome'
@@ -31,6 +33,8 @@ interface ChatMessagesProps {
 
 export const ChatMessages = ({ name, member, chatId, apiUrl, socketUrl, socketQuery, paramKey, paramValue, type }: ChatMessagesProps) => {
     const queryKey = `chat:${chatId}`
+    const addKey = `chat:${chatId}:messages`
+    const updateKey = `chat:${chatId}:messages:update`
 
     const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useChatQuery({
         queryKey,
@@ -39,7 +43,7 @@ export const ChatMessages = ({ name, member, chatId, apiUrl, socketUrl, socketQu
         paramValue,
     })
 
-    console.log('Chat messages@data:', data)
+    useChatSocket({ queryKey, addKey, updateKey })
 
     if (status === 'pending') {
         return (
@@ -64,7 +68,6 @@ export const ChatMessages = ({ name, member, chatId, apiUrl, socketUrl, socketQu
             <div className='flex-1'></div>
             <ChatWelcome name={name} type={type} />
             <div className='flex flex-col-reverse mt-auto'>
-                <h1>Message</h1>
                 {data?.pages?.map((group, i) => (
                     <Fragment key={i}>
                         {group?.items?.map((message: MessageWithMemberWithProfile) => (
