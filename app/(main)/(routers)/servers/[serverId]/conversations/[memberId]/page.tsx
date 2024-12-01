@@ -3,8 +3,10 @@ import { redirect } from 'next/navigation'
 
 import { db } from '@/lib/db'
 import { currentProfile } from '@/lib/current-profile'
-import { getOrCreateCoversation } from '@/lib/conversation'
+import { getOrCreateConversation } from '@/lib/conversation'
 import { ChatHeader } from '@/components/chat/chat-header'
+import { ChatInput } from '@/components/chat/chat-input'
+import { ChatMessages } from '@/components/chat/chat-messages'
 
 interface MemberIdPageProps {
     params: {
@@ -36,7 +38,7 @@ const MemberIdPage = async ({ params }: MemberIdPageProps) => {
         return redirect('/')
     }
 
-    const conversation = await getOrCreateCoversation(currentMember.id, memberId)
+    const conversation = await getOrCreateConversation(currentMember.id, memberId)
 
     if (!conversation) {
         return redirect(`/services/${serverId}`)
@@ -50,6 +52,27 @@ const MemberIdPage = async ({ params }: MemberIdPageProps) => {
     return (
         <div className='bg-white dark:bg-[#313338] flex flex-col h-full'>
             <ChatHeader type='conversation' serverId={serverId} name={otherMember.profile.name} imageUrl={otherMember.profile.imageUrl} />
+            <ChatMessages
+                member={currentMember}
+                name={otherMember.profile.name}
+                chatId={conversation.id}
+                type='conversation'
+                apiUrl='/api/direct-messages'
+                paramKey='conversationId'
+                paramValue={conversation.id}
+                socketUrl='/api/socket/direct-messages'
+                socketQuery={{
+                    conversationId: conversation.id,
+                }}
+            />
+            <ChatInput
+                name={otherMember.profile.name}
+                type='conversation'
+                apiUrl='/api/socket/direct-messages'
+                query={{
+                    conversationId: conversation.id,
+                }}
+            />
         </div>
     )
 }
