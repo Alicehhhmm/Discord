@@ -29,7 +29,8 @@ bun dev
 
 # Cloud toolchain
 
-| 工具        | 用途                 | 是否账户 |
-| ----------- | -------------------- | -------- |
-| uploadthing | 文件存储 (2G 内免费) | Yes      |
-| ClerkJS     | 身份认证             | Yes      |
+| 工具                                | 用途                 | 是否账户 |
+| ----------------------------------- | -------------------- | -------- |
+| uploadthing                         | 文件存储 (2G 内免费) | Yes      |
+| ClerkJS                             | 身份认证             | Yes      |
+| [livekit](https://cloud.livekit.io) | 音视频               | Yes      |
