@@ -50,7 +50,7 @@ export function MediaRoom({ chatId, video, audio }: MediaRoomProps) {
             token={token}
             serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
             data-lk-theme='default'
-            style={{ height: '100dvh' }}
+            // style={{ height: '100%' }}
         >
             <VideoConference />
         </LiveKitRoom>
