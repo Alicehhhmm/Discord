@@ -8,7 +8,7 @@ import { db } from '@/lib/db';
  * @param memberTwoId 
  * @returns first conversation
  */
-const findCoversation = async (memberOneId: string, memberTwoId: string) => {
+const findConversation = async (memberOneId: string, memberTwoId: string) => {
     try {
         return await db.conversation.findFirst({
             where: {
@@ -41,7 +41,7 @@ const findCoversation = async (memberOneId: string, memberTwoId: string) => {
  * @param memberTwoId 
  * @returns new conversation
  */
-const createNewCoversation = async (memberOneId: string, memberTwoId: string) => {
+const createNewConversation = async (memberOneId: string, memberTwoId: string) => {
     try {
         return await db.conversation.create({
             data: {
@@ -72,11 +72,11 @@ const createNewCoversation = async (memberOneId: string, memberTwoId: string) =>
  * @param memberTwoId 其他用户memberId
  * @returns any conversation
  */
-export const getOrCreateCoversation = async (memberOneId: string, memberTwoId: string) => {
-    let conversation = await findCoversation(memberOneId, memberTwoId) || await findCoversation(memberTwoId, memberOneId)
+export const getOrCreateConversation = async (memberOneId: string, memberTwoId: string) => {
+    let conversation = await findConversation(memberOneId, memberTwoId) || await findConversation(memberTwoId, memberOneId)
 
     if (!conversation) {
-        conversation = await createNewCoversation(memberOneId, memberTwoId)
+        conversation = await createNewConversation(memberOneId, memberTwoId)
     }
 
     return conversation

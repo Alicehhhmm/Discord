@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { Plus, Smile } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { useModal } from '@/hooks/use-modal-store'
@@ -17,7 +17,7 @@ interface ChatInputProps {
     apiUrl: string
     query: Record<string, any>
     name: string
-    type: 'channel' | 'coversation'
+    type: 'channel' | 'conversation'
 }
 
 const formSchema = z.object({
@@ -76,7 +76,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                                     </button>
                                     <Input
                                         disabled={isLoading}
-                                        placeholder={`Message ${type === 'coversation' ? name : '#' + name}`}
+                                        placeholder={`Message ${type === 'conversation' ? name : '#' + name}`}
                                         className='px-14 py-6 bg-zinc-200/90
                                         dark:bg-zinc-700/75 border-none border-0
                                         focus-visible:right-0 focus-visible:ring-offset-0
