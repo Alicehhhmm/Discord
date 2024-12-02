@@ -17,7 +17,7 @@
         "@hookform/resolvers": "^3.9.1",
         "@livekit/components-react": "^2.6.9",
         "@livekit/components-styles": "^1.1.4",
-        "@prisma/client": "^5.22.0",
+        "@prisma/client": "^6.0.0",
         "@radix-ui/react-avatar": "^1.1.1",
         "@radix-ui/react-dialog": "^1.1.2",
         "@radix-ui/react-dropdown-menu": "^2.1.2",
@@ -63,7 +63,7 @@
         "eslint": "^8",
         "eslint-config-next": "15.0.3",
         "postcss": "^8",
-        "prisma": "^5.22.0",
+        "prisma": "^6.0.0",
         "rimraf": "^6.0.1",
         "tailwindcss": "^3.4.1",
         "typescript": "^5"
